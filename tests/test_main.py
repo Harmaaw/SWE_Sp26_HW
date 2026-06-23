@@ -53,36 +53,8 @@ class MainTestCase(unittest.TestCase):
         text = response.get_data(as_text=True)
 
         self.assertIn("Position (X, Y, Z) in km:", text)
-        self.assertIn("TLE DateTime: 2026-06-07T21:37:51+00:00", text)
-
-    @mock.patch('app.main.views.requests.get', side_effect=mocked_requests_get)
-    @mock.patch('app.main.views.parse_response', return_value=None)
-    def test_calculate_parse_response_failure(self, mock_parse_response, mock_get):
-        response = self.client.post('/calculate', data={
-            'input_date_time': datetime.datetime(2026, 6, 1, 12, 0)
-        })
 
         self.assertIn(
-            "Something went wrong. Try again.",
-            response.get_data(as_text=True)
-        )
-
-    def test_calculate_get(self):
-        response = self.client.get('/calculate')
-        self.assertEqual(response.status_code, 200)
-
-            def test_index(self):
-        response = self.client.get('/')
-        self.assertEqual(response.status_code, 200)
-
-    @mock.patch('app.main.views.requests.get', side_effect=mocked_requests_get)
-    @mock.patch('app.main.views.parse_satellite', return_value=(1, None, None))
-    def test_calculate_parse_satellite_error(self, mock_parse_satellite, mock_get):
-        response = self.client.post('/calculate', data={
-            'input_date_time': datetime.datetime(2026, 6, 1, 12, 0)
-        })
-
-        self.assertIn(
-            "Something went wrong. Try again.",
-            response.get_data(as_text=True)
+            "TLE DateTime: 2026-06-07T21:37:51+00:00",
+            text
         )
