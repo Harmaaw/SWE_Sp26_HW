@@ -21,7 +21,7 @@ def calculate():
 		if tle_dict:
 			(error, r, v) = parse_satellite(tle_dict, s_date_time)
 			if error == 0:
-				result = {"tle_date_time":"TLE DateTime: ", "l1":f"Position (X, Y, Z) in km: {r}", "l2":f"Velocity (dx, dy, dz) in km/s: {v}", "msg":"Satellite/space object position and velocity calculated"}
+				result = {"tle_date_time":f"TLE DateTime: {tle_dict['tle_date_time']}", "l1":f"Position (X, Y, Z) in km: {r}", "l2":f"Velocity (dx, dy, dz) in km/s: {v}", "msg":"Satellite/space object position and velocity calculated"}
 			else:
 				result = {"msg":"Something went wrong. Try again."}	
 		else:
